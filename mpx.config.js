@@ -1,10 +1,19 @@
 const { defineConfig } = require('@vue/cli-service')
+const { resolve } = require('path')
+
 module.exports = defineConfig({
   outputDir: `dist/${process.env.MPX_CURRENT_TARGET_MODE}`,
   pluginOptions: {
     mpx: {
       plugin: {
         srcMode: 'wx',
+        modeRules: {
+          ali: {
+            include: [
+              resolve('node_modules/antd-mini')
+            ]
+          }
+        },
         hackResolveBuildDependencies: ({ files, resolveDependencies }) => {
           const path = require('path')
           const packageJSONPath = path.resolve('package.json')
