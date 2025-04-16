@@ -20,6 +20,11 @@ module.exports = defineConfig({
             ]
           }
         },
+        autoVirtualHostRules: {
+          include: [
+            resolve('node_modules/antd-mini')
+          ]
+        },
         hackResolveBuildDependencies: ({ files, resolveDependencies }) => {
           const path = require('path')
           const packageJSONPath = path.resolve('package.json')

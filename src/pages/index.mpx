@@ -1,13 +1,48 @@
 <template>
+  <!-- <ant-icon type="SmileOutline" bindtap="onTap" /> -->
+  <ant-slider defaultValue="{{80}}" bindChange="onChange" bindAfterChange="onAfterChange" />
   <ant-button inline bindtap="onTap">点我</ant-button>
 </template>
 
 <script>
   import { createPage } from '@mpxjs/core'
+  import {showToast} from '@mpxjs/api-proxy'
 
   createPage({
+    data: {
+      visible: true,
+      list: [
+        { text: '扫一扫', icon: 'ScanningOutline', showBadge: true, id: 'scan' },
+        { text: '付钱/收钱', icon: 'ReceivePaymentOutline', showBadge: false, id: 'pay' },
+        { text: '乘车码', icon: 'TransportQRcodeOutline', showBadge: false, id: 'code' },
+        {
+          text: '图片',
+          iconImage:
+            'https://gw.alipayobjects.com/mdn/rms_ce4c6f/afts/img/A*XMCgSYx3f50AAAAAAAAAAABkARQnAQ',
+          showBadge: false,
+          id: 'image'
+        }
+      ]
+    },
+    handleVisibleChange(visible, e) {
+      console.log('handleVisibleChange', visible, e)
+      this.setData({ visible: visible })
+    },
+    handleTapItem(e, item) {
+      console.log('handleTapItem', e, item)
+      // this.setData({ visible: false })
+      this.visible = !this.visible
+    },
     onTap() {
       console.log('onTap')
+      // this.visible = !this.visible
+    },
+    onChange(value, e) {
+      console.log('slider changed:', value, e)
+    },
+    onAfterChange(value, e) {
+      console.log('当前值:', value, e)
+      showToast({ title: `value: ${value}` })
     }
   })
 </script>
@@ -15,7 +50,10 @@
 <script name="json">
   module.exports = {
     usingComponents: {
-      'ant-button': 'antd-mini/Button/index'
+      'ant-button': 'antd-mini/Button/index',
+      'ant-popover-list': 'antd-mini/PopoverList/index',
+      'ant-icon': 'antd-mini/Icon/index',
+      'ant-slider': 'antd-mini/Slider/index'
     }
   }
 </script>
