@@ -1,18 +1,21 @@
 <template>
-  <ant-button type="primary" bindtap="handleTap">主要按钮</ant-button>
+  <ant-button inline bindtap="onTap">点我</ant-button>
 </template>
 
 <script>
   import { createPage } from '@mpxjs/core'
 
   createPage({
+    onTap() {
+      console.log('onTap')
+    }
   })
 </script>
 
 <script name="json">
-module.exports = {
-    "usingComponents": {
-      "ant-button": "antd-mini/es/Button/index",
+  module.exports = {
+    usingComponents: {
+      'ant-button': 'antd-mini/Button/index'
     }
   }
 </script>

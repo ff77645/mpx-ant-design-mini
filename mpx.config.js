@@ -1,6 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const { resolve } = require('path')
-const loadingPath = resolve('node_modules/antd-mini/es/Loading/index.sjs')
+const corssComponents = require('./corss-components.js')
+
 module.exports = defineConfig({
   outputDir: `dist/${process.env.MPX_CURRENT_TARGET_MODE}`,
   pluginOptions: {
@@ -9,6 +10,11 @@ module.exports = defineConfig({
         srcMode: 'wx',
         modeRules: {
           ali: {
+            include: [
+              resolve('node_modules/antd-mini')
+            ]
+          },
+          wx: {
             include: [
               resolve('node_modules/antd-mini')
             ]
@@ -32,11 +38,16 @@ module.exports = defineConfig({
    * 可以将configureWebpack.snap.managedPaths修改为 []
    */
   configureWebpack(config) {
+    const alias = {}
+
+    if (process.env.MPX_CURRENT_TARGET_MODE === 'ali') {
+      corssComponents.forEach(key => {
+        alias[`antd-mini/${key}/index`] = `antd-mini/es/${key}/index`
+      })
+    }
     return {
       resolve: {
-        alias: {
-          [loadingPath]: resolve('src/components/Loading/index.sjs')
-        }
+        alias
       }
     }
   }
