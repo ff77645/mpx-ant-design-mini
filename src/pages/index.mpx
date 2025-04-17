@@ -1,6 +1,6 @@
 <template>
-  <!-- <ant-icon type="SmileOutline" bindtap="onTap" /> -->
-  <ant-slider defaultValue="{{80}}" bindChange="onChange" bindAfterChange="onAfterChange" />
+  <ant-icon type="SmileOutline" bindtap="onTap" />
+  <ant-slider defaultValue="{{80}}" bindchange="onChange" bindafterchange="onAfterChange" />
   <ant-button inline bindtap="onTap">点我</ant-button>
 </template>
 
@@ -33,8 +33,8 @@
       // this.setData({ visible: false })
       this.visible = !this.visible
     },
-    onTap() {
-      console.log('onTap')
+    onTap(e) {
+      console.log('onTap',e)
       // this.visible = !this.visible
     },
     onChange(value, e) {

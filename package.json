@@ -7,7 +7,9 @@
     "dev:ali": "mpx-cli-service serve --targets ali",
     "build": "mpx-cli-service build",
     "build:cross": "mpx-cli-service build --targets=wx,ali",
-    "lint": "eslint --ext .js,.ts,.mpx src/"
+    "lint": "eslint --ext .js,.ts,.mpx src/",
+    "g:mpx":"node ./scripts/g-antd-mini-mpx.js",
+    "r:mpx":"node ./scripts/remove-antd-mini-mpx.js"
   },
   "dependencies": {
     "@mpxjs/api-proxy": "^2.10.3",

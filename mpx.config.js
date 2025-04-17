@@ -1,6 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 const { resolve } = require('path')
-const corssComponents = require('./corss-components.js')
+// const corssComponents = require('./corss-components.js')
 
 module.exports = defineConfig({
   outputDir: `dist/${process.env.MPX_CURRENT_TARGET_MODE}`,
@@ -8,22 +8,22 @@ module.exports = defineConfig({
     mpx: {
       plugin: {
         srcMode: 'wx',
-        modeRules: {
-          ali: {
-            include: [
-              resolve('node_modules/antd-mini')
-            ]
-          },
-          wx: {
-            include: [
-              resolve('node_modules/antd-mini')
-            ]
-          }
-        },
+        // modeRules: {
+        //   ali: {
+        //     include: [
+        //       resolve('node_modules/antd-mini')
+        //     ]
+        //   },
+        //   wx: {
+        //     include: [
+        //       resolve('node_modules/antd-mini')
+        //     ]
+        //   }
+        // },
         autoVirtualHostRules: {
-          include: [
-            resolve('node_modules/antd-mini')
-          ]
+          include: process.env.MPX_CURRENT_TARGET_MODE === 'wx'
+            ? [resolve('node_modules/antd-mini')]
+            : undefined
         },
         hackResolveBuildDependencies: ({ files, resolveDependencies }) => {
           const path = require('path')
@@ -45,11 +45,15 @@ module.exports = defineConfig({
   configureWebpack(config) {
     const alias = {}
 
-    if (process.env.MPX_CURRENT_TARGET_MODE === 'ali') {
-      corssComponents.forEach(key => {
-        alias[`antd-mini/${key}/index`] = `antd-mini/es/${key}/index`
-      })
-    }
+    // if (process.env.MPX_CURRENT_TARGET_MODE === 'ali') {
+    //   corssComponents.forEach(key => {
+    //     alias[`antd-mini/${key}/index`] = `antd-mini/es/${key}/index`
+    //   })
+    // } else if (process.env.MPX_CURRENT_TARGET_MODE === 'wx') {
+    //   corssComponents.forEach(key => {
+    //     alias[`antd-mini/${key}/index`] = `antd-mini/compiled/wechat/src/${key}/index`
+    //   })
+    // }
     return {
       resolve: {
         alias
