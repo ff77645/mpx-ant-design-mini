@@ -24,6 +24,7 @@ module.exports = defineConfig({
           include: process.env.MPX_CURRENT_TARGET_MODE === 'wx'
             ? [resolve('node_modules/antd-mini')]
             : undefined
+          // include: [resolve('node_modules/antd-mini')]
         },
         hackResolveBuildDependencies: ({ files, resolveDependencies }) => {
           const path = require('path')

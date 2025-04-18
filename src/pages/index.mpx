@@ -2,14 +2,97 @@
   <ant-icon type="SmileOutline" bindtap="onTap" />
   <ant-slider defaultValue="{{80}}" bindchange="onChange" bindafterchange="onAfterChange" />
   <ant-button inline bindtap="onTap">点我</ant-button>
+  <ant-divider
+    text="custom styles"
+    textStyle="color:#1677ff; fontWeight:600"
+    lineHeight="{{2}}"
+    lineType="dashed"
+    lineColor="#1677ff"
+  />
+  <ant-grid items="{{items}}" iconSize="{{36}}" columns="{{3}}" />
+  <ant-space align="start">
+    <ant-button type="primary">按钮1</ant-button>
+    <view class="custom-box">高度不同的内容</view>
+    <ant-button>按钮3</ant-button>
+  </ant-space>
+  <ant-sticky top="100px">
+    <view> 我会吸顶在距离顶部 100px 的地方 </view>
+  </ant-sticky>
+  <ant-safe-area position="bottom"></ant-safe-area>
+  <!-- <ant-guide-tour
+    items="{{items2}}"
+    visible="{{visible}}"
+    bindcancel="closeTour"
+    bindchange="onChange"
+  /> -->
+  <ant-steps
+  items="{{items3}}"
+  current="{{1}}"
+  status="error"
+/>
+  <!-- <ant-popover-list
+    visible="{{visible}}"
+    list="{{list}}"
+    placement="bottom-right"
+    bindtapitem="handleTapItem"
+    bindvisiblechange="handleVisibleChange"
+  >
+    <ant-button inline>点我</ant-button>
+  </ant-popover-list> -->
 </template>
 
 <script>
   import { createPage } from '@mpxjs/core'
-  import {showToast} from '@mpxjs/api-proxy'
+  import { showToast } from '@mpxjs/api-proxy'
 
   createPage({
     data: {
+      items3: [
+      {
+        title: 'Step1',
+        description: 'description',
+      },
+      {
+        title: 'Step2',
+        description: 'description',
+      },
+      {
+        title: 'Step3',
+        description: 'description',
+      },
+    ],
+      items: [
+        {
+          title: 'title text',
+          icon: 'https://gw.alipayobjects.com/mdn/rms_3a7189/afts/img/A*L8FjQ7lSdq4AAAAAAAAAAAAAARQnAQ'
+        },
+        {
+          title: 'title text',
+          icon: 'https://gw.alipayobjects.com/mdn/rms_3a7189/afts/img/A*L8FjQ7lSdq4AAAAAAAAAAAAAARQnAQ'
+        },
+        {
+          title: 'title text',
+          icon: 'https://gw.alipayobjects.com/mdn/rms_3a7189/afts/img/A*L8FjQ7lSdq4AAAAAAAAAAAAAARQnAQ'
+        }
+      ],
+      items2: [
+        {
+          left: 20,
+          top: 80,
+          imageUrl: 'https://gw.alipayobjects.com/zos/antfincdn/IV3MGP1qL/bianzu%25252013.png',
+          imageMode: 'widthFix'
+        },
+        {
+          left: 20,
+          top: 160,
+          imageUrl: 'https://gw.alipayobjects.com/zos/antfincdn/%26B6d3lBJn/bianzu%25252020.png'
+        },
+        {
+          left: 20,
+          top: 220,
+          imageUrl: 'https://gw.alipayobjects.com/zos/antfincdn/lwVOkCcwb/bianzu%25252021.png'
+        }
+      ],
       visible: true,
       list: [
         { text: '扫一扫', icon: 'ScanningOutline', showBadge: true, id: 'scan' },
@@ -25,16 +108,16 @@
       ]
     },
     handleVisibleChange(visible, e) {
-      console.log('handleVisibleChange', visible, e)
-      this.setData({ visible: visible })
+      console.log(visible, e)
+      this.setData({ visible: visible.detail })
     },
     handleTapItem(e, item) {
-      console.log('handleTapItem', e, item)
-      // this.setData({ visible: false })
-      this.visible = !this.visible
+      console.log(e, item)
+      this.setData({ visible: false })
+      showToast({ title: '点击列表' })
     },
     onTap(e) {
-      console.log('onTap',e)
+      console.log('onTap', e)
       // this.visible = !this.visible
     },
     onChange(value, e) {
@@ -50,10 +133,76 @@
 <script name="json">
   module.exports = {
     usingComponents: {
+      'ant-action-sheet': 'antd-mini/ActionSheet/index',
+      'ant-alphabet': 'antd-mini/Alphabet/index',
+      'ant-auto-resize': 'antd-mini/AutoResize/index',
+      'ant-avatar': 'antd-mini/Avatar/index',
+      'ant-badge': 'antd-mini/Badge/index',
       'ant-button': 'antd-mini/Button/index',
-      'ant-popover-list': 'antd-mini/PopoverList/index',
+      'ant-calendar': 'antd-mini/Calendar/index',
+      'ant-card': 'antd-mini/Card/index',
+      'ant-checkbox': 'antd-mini/Checkbox/index',
+      'ant-checklist': 'antd-mini/Checklist/index',
+      'ant-collapse': 'antd-mini/Collapse/index',
+      'ant-config-provider': 'antd-mini/ConfigProvider/index',
+      'ant-container': 'antd-mini/Container/index',
+      'ant-countdown': 'antd-mini/Countdown/index',
+      'ant-date-picker': 'antd-mini/DatePicker/index',
+      'ant-dialog': 'antd-mini/Dialog/index',
+      'ant-divider': 'antd-mini/Divider/index',
+      'ant-empty': 'antd-mini/Empty/index',
+      'ant-feedback': 'antd-mini/Feedback/index',
+      'ant-footer': 'antd-mini/Footer/index',
+      // "ant-form": "antd-mini/Form/index",
+      'ant-grid': 'antd-mini/Grid/index',
+      'ant-guide-tour': 'antd-mini/GuideTour/index',
       'ant-icon': 'antd-mini/Icon/index',
-      'ant-slider': 'antd-mini/Slider/index'
+      'ant-image-upload': 'antd-mini/ImageUpload/index',
+      'ant-index-bar': 'antd-mini/IndexBar/index',
+      'ant-input': 'antd-mini/Input/index',
+      'ant-list': 'antd-mini/List/index',
+      'ant-loading': 'antd-mini/Loading/index',
+      'ant-modal': 'antd-mini/Modal/index',
+      'ant-notice-bar': 'antd-mini/NoticeBar/index',
+      'ant-number-input': 'antd-mini/NumberInput/index',
+      'ant-number-keyboard': 'antd-mini/NumberKeyboard/index',
+      'ant-page-container': 'antd-mini/PageContainer/index',
+      'ant-picker': 'antd-mini/Picker/index',
+      'ant-popover': 'antd-mini/Popover/index',
+      'ant-popover-list': 'antd-mini/PopoverList/index',
+      'ant-popup': 'antd-mini/Popup/index',
+      'ant-postscript': 'antd-mini/Postscript/index',
+      'ant-progress': 'antd-mini/Progress/index',
+      'ant-radio': 'antd-mini/Radio/index',
+      'ant-rare-words-keyboard': 'antd-mini/RareWordsKeyboard/index',
+      'ant-rate': 'antd-mini/Rate/index',
+      'ant-result': 'antd-mini/Result/index',
+      'ant-safe-area': 'antd-mini/SafeArea/index',
+      'ant-select-contact': 'antd-mini/SelectContact/index',
+      'ant-selector': 'antd-mini/Selector/index',
+      'ant-skeleton': 'antd-mini/Skeleton/index',
+      'ant-slider': 'antd-mini/Slider/index',
+      'ant-space': 'antd-mini/Space/index',
+      'ant-stepper': 'antd-mini/Stepper/index',
+      'ant-steps': 'antd-mini/Steps/index',
+      'ant-sticky': 'antd-mini/Sticky/index',
+      'ant-swipe-action': 'antd-mini/SwipeAction/index',
+      'ant-switch': 'antd-mini/Switch/index',
+      'ant-tab-bar': 'antd-mini/TabBar/index',
+      'ant-table': 'antd-mini/Table/index',
+      'ant-tabs': 'antd-mini/Tabs/index',
+      'ant-tag': 'antd-mini/Tag/index',
+      'ant-terms': 'antd-mini/Terms/index',
+      'ant-toast': 'antd-mini/Toast/index',
+      'ant-typography': 'antd-mini/Typography/index',
+      'ant-voucher': 'antd-mini/Voucher/index',
+      'ant-actions': 'antd-mini/Actions/index',
+      'ant-bubble': 'antd-mini/Bubble/index',
+      'ant-conversations': 'antd-mini/Conversations/index',
+      'ant-prompts': 'antd-mini/Prompts/index',
+      'ant-sender': 'antd-mini/Sender/index',
+      'ant-thought-chain': 'antd-mini/ThoughtChain/index',
+      'ant-welcome': 'antd-mini/Welcome/index'
     }
   }
 </script>
